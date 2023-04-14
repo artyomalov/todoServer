@@ -12,6 +12,7 @@ const getFindArg = (filterValue) => {
 
 exports.getTodos = async function(req, res) {
     const findArg = getFindArg(req.query.filterValue)
+    
     const allTodos = await Todo.find(findArg);
     res.send(allTodos);
 }

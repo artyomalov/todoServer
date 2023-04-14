@@ -1,18 +1,23 @@
 const Todo = require('../models/todoModel');
 
 exports.updateTodo = async (req, res) => {
-  const updatingTodoId = req.params.id;
-  const updatingTodoProp = req.body.prop;
-  const updatingTodoValue = req.body.value;
-  
-  console.log(updatingTodoId);
-  console.log(updatingTodoProp);
-  console.log(updatingTodoValue);
+  try {
+    const updatingTodoId = req.params.id;
+    const updatingTodoProp = req.body.prop;
+    const updatingTodoValue =
+      req.body.prop === 'completed' ? !req.body.value : req.body.value;
 
-  const updatedTodo = await Todo.findByIdAndUpdate(updatingTodoId, {[updatingTodoProp]: updatingTodoValue}, {new: true})
-  console.log(updatedTodo);
-  if(!updatedTodo) {
-    res.sendStatus(404);
+      const updatedTodo = await Todo.findByIdAndUpdate(
+      updatingTodoId,
+      { [updatingTodoProp]: updatingTodoValue },
+      { new: true }
+    );
+    if (!updatedTodo) {
+      res.sendStatus(404);
+      throw new Error('Cant connect to the data base');
+    }
+    res.json(updatedTodo);
+  } catch (err) {
+    console.log(err);
   }
-  res.json(updatedTodo);
-}
+};
