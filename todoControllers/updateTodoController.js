@@ -4,10 +4,11 @@ exports.updateTodo = async (req, res) => {
   try {
     const updatingTodoId = req.params.id;
     const updatingTodoProp = req.body.prop;
+    console.log(updatingTodoProp);
     const updatingTodoValue =
       req.body.prop === 'completed' ? !req.body.value : req.body.value;
 
-      const updatedTodo = await Todo.findByIdAndUpdate(
+    const updatedTodo = await Todo.findByIdAndUpdate(
       updatingTodoId,
       { [updatingTodoProp]: updatingTodoValue },
       { new: true }
