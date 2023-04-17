@@ -9,7 +9,8 @@ exports.deleteTodo = async (req, res) => {
       res.sendStatus(404);
       throw new Error('Data base error! No corresponding todo');
     }
-    res.json(deletedTodo);
+    const todosTotalCount = await Todo.countDocuments();
+    res.json(todosTotalCount);
   } catch (err) {
     console.log(err);
   }
