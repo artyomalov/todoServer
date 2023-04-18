@@ -14,7 +14,16 @@ app.use('/todos', todoRouter);
 async function main() {
   try{
     await mongoose.connect("mongodb://127.0.0.1:27017/todoDb");
-    app.listen(4850, ()=>{console.log('Server has been started')});
+    app.listen(4951, ()=>{console.log('Server has been started')});
+  
+    process.on("SIGINT", async() => {
+      
+      await mongoClient.close();
+      console.log("Приложение завершило работу");
+      process.exit();
+  })
+  
+  
   } catch(err){
     console.log(err);
   }
@@ -24,9 +33,6 @@ async function main() {
 
 
 main()
-
-
-// CORS ПОЧИТАТЬ БИБЛИОТЕКА
 
 
 // sudo systemctl start mongod

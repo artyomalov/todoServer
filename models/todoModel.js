@@ -3,6 +3,9 @@ const Schema = mongoose.Schema;
 
 const TodoSchema = new Schema(
   {
+    user_id: {
+      type: Number,
+    },
     text: {
       type: String,
     },

@@ -17,7 +17,8 @@ exports.updateTodo = async (req, res) => {
       res.sendStatus(404);
       throw new Error('Cant connect to the data base');
     }
-    res.json({returnedTodo, activeTodosCount});
+    const paginationData = {activeTodosCount}
+    res.json({returnedTodo, paginationData});
   } catch (err) {
     console.log(err);
   }
