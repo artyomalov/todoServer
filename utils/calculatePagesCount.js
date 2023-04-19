@@ -4,7 +4,7 @@ exports.calculatePagesCount = async (filterValue, pageNumber) => {
   const todosTotalCount = await Todo.countDocuments();
   const activeTodosCount = await Todo.countDocuments({ completed: false });
 
-  let requiredTodosCount = await Todo.countDocuments();
+  let todosCount = todosTotalCount;
 
   if (filterValue !== 'all') {
     todosCount =
@@ -15,7 +15,7 @@ exports.calculatePagesCount = async (filterValue, pageNumber) => {
           }));
   }
 
-  const unruondeedCount = requiredTodosCount / 5;
+  const unruondeedCount = todosCount / 5;
 
   const pagesCount =
     unruondeedCount % 1 === 0 ? unruondeedCount : Math.ceil(unruondeedCount);
